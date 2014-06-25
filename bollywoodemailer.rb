@@ -31,6 +31,8 @@ class ScrapedSongs
 		film = project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span a.ma71528").text
 	end
 
+end
+
 
 
 class Email
@@ -142,9 +144,6 @@ end
 # 		:percent_funded => project.css("ul.project-stats li.first.funded strong").text
 # 	}
 # end
-
-
-
 
 
 
