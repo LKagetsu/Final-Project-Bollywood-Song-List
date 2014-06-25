@@ -16,6 +16,22 @@ projects[:music_link] = "http://www.bollywoodhungama.com/more/music/index/type/l
 
 
 
+class ScrapedSongs
+	
+	def initialize(html)
+		@html = Nokogiri::HTML(html)
+		@title
+		@film
+
+	def get_title
+		title = project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span.m0081c8 a").text.to_sym
+	end
+
+	def get_film
+		film = project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span a.ma71528").text
+	end
+
+
 
 class Email
 	
@@ -34,15 +50,19 @@ class Email
 			:from => "postmaster@sandbox0643d7a456af493ab765c4812d96d929.mailgun.org"
 		}
 
-		task :text
+		task :text << END_OF_MESSAGE
 			puts
 				<h1> <link href=:music_link "#{:title}"</h1>
 				<h2> :from </h2>
 				<h1> :film </h1>
+
+		END_OF_MESSAGE
 		
 
-
-
+#moving to github
+#song link (java)
+#email text?
+#youtube?
 
 
 		end
@@ -122,6 +142,9 @@ end
 # 		:percent_funded => project.css("ul.project-stats li.first.funded strong").text
 # 	}
 # end
+
+
+
 
 
 
