@@ -13,6 +13,9 @@ task :emailsongs do
 
 end
 
+every month do
+	task
+end
 
 
 
