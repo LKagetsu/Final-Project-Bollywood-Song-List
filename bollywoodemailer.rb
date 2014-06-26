@@ -4,43 +4,37 @@ require 'open-uri'
 
 
 
-bollywood = Nokogiri::HTML(html)
-projects[:music_link] = "http://www.bollywoodhungama.com/more/music/index/type/listing#"
-
-
 
 class ScrapeSongs
 	
-	def initialize(html)
-		html = open('http://www.bollywoodhungama.com/more/music/index/type/listing')
-		@html = Nokogiri::HTML(html)
+	def initialize
+		@html = Nokogiri::HTML(open('http://www.bollywoodhungama.com/more/music/index/type/listing'))
 	end
 
 	def scrape_data
+		#TODO: duplicating all songs-- need to sanitize
 		projects = {}
 
-		projects[:music_link] = "http://www.bollywoodhungama.com/more/music/index/type/listing#"
-
-		bollywood.css("div.play_music_cont").each do |project|
+		@html.css("div.play_music_cont").each do |project|
 			
-			title = project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span.m0081c8 a").text.to_sym
+			title = project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span.m0081c8 a").text
 			
 			projects[title] = {
-				# :song_id => project.css("li.mfl.mht22.moverflow.minline input.chk_1828482"),
 				:title => title,
-				:from => project.css("li.mfl.mwidth425.bg_0000 h3 span.mb_000.mfnt11").text,
-				:film => project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span a.ma71528").text
+				:film => project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span a.ma71528").text,
 				# :music_link => project.css("li.mfl.malignlft.moverflow.minline.mht24.mmr15 a")["href"]
-				
+				:music_link => "http://www.bollywoodhungama.com/more/music/index/type/listing#"
 			}
 		end
+		projects
 	end
-
 
 #iteraate throught the projects hash -- projects.each do |hash| ---> hash.each do |k, v| ---> {:title => etc.}
 
 
 end
+
+
 
 
 class Songs
@@ -70,26 +64,34 @@ class Songs
 
 	def self.new_songs
 		instance_of_scraper_class = ScrapeSongs.new
-		instance_of_scraper_class.scrape_data.each do |k, v|
-			puts k = Songs.new
-			puts k.title = v[:title]
-			puts k.film = v[:film]
+		instance_of_scraper_class.scrape_data.each do |big_hash_key, big_hash_value|
+			new_song = big_hash_key.to_s
+			new_song = Songs.new
+			new_song.title = big_hash_value[:title]
+			new_song.film = big_hash_value[:film]
+		end
+	end
+
+
 	#a method that will give us the projects array/hash?
 
 
 	#create a new instance of your ScrapeSong class
 	#class Songs on that instance
+
 end
 
 
+# binding.pry
 
 
 
-song = ScrapeSongs.new
+# song = ScrapeSongs.new
+# song.title
 
-song.title
+# song.title
 
-song.film
+# song.film
 
 # class Email
 
@@ -174,4 +176,3 @@ song.film
 
 
 
-binding.pry

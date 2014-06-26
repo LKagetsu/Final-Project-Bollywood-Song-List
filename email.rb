@@ -1,5 +1,5 @@
 require 'mailgun'
-require 'bollywoodemailer.rb'
+# require 'bollywoodemailer.rb'
 
 
 class Email
@@ -12,19 +12,23 @@ class Email
 	def send(email_address)
 		@mailgun = Mailgun(:api_key => 'your-api-key')
 
+		Songs.new_songs
+
 		parameters = {
 		 	:to => "monkeybizz14@gmail.com",
 			:subject => "Recent Popular Bollywood Songs",
 			:text => "I'm sending this through a web app i made. text me if this works :D, <3 Lauren",
 			:from => "postmaster@sandbox0643d7a456af493ab765c4812d96d929.mailgun.org"
 		}
-		parameters[:to] = (email_address)
+		parameters[:to] = email_address
+
 		Songs.all.each do |v|
 			parameters[:text] = "#{v.title} from #{v.film}. Link: #{v.music_link}"
+		end
 		@mailgun.messages.send_email(parameters)
 	end
 
 end
 
-Hello = Email.new
-Hello.send("lkagetsu@gmail.com")
+hello = Email.new
+hello.send("lkagetsu@gmail.com")
