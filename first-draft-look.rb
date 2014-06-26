@@ -1,45 +1,16 @@
 require 'pry'
+
 require 'nokogiri'
 require 'open-uri'
 
-require 'mailgun'
-
-
-html = open('http://www.bollywoodhungama.com/more/music/index/type/listing')
-
-bollywood = Nokogiri::HTML(html)
-
-projects = {}
-
-projects[:music_link] = "http://www.bollywoodhungama.com/more/music/index/type/listing#"
-
-
-
-# class ScrapedSongs
-	
-# 	def initialize(html)
-# 		@html = Nokogiri::HTML(html)
-# 		@title
-# 		@film
-
-# 	def get_title
-# 		title = project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span.m0081c8 a").text.to_sym
-# 	end
-
-# 	def get_film
-# 		film = project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span a.ma71528").text
-# 	end
-
-# end
-
-
+# require 'mailgun'
 
 # class Email
-
 # 	Mailgun.configure do |config|
 # 	  config.api_key = 'key-7oyo8ubqwl5vsangtntrlsadgq8cpd37'
 # 	  config.domain  = 'sandbox0643d7a456af493ab765c4812d96d929.mailgun.org'
 # 	end
+
 
 # 	def send(email_address)
 # 		@mailgun = Mailgun(:api_key => 'your-api-key')
@@ -50,61 +21,34 @@ projects[:music_link] = "http://www.bollywoodhungama.com/more/music/index/type/l
 # 			:text => text,
 # 			:from => "postmaster@sandbox0643d7a456af493ab765c4812d96d929.mailgun.org"
 # 		}
-
-# 		task :text << END_OF_MESSAGE
-# 			puts
-# 				<h1> <link href=:music_link "#{:title}"</h1>
-# 				<h2> :from </h2>
-# 				<h1> :film </h1>
-
-# 		END_OF_MESSAGE
-		
-
-#moving to github
-#song link (java)
-#email text?
-#youtube?
-
-
-		# end
-
-# 		text = {
-			bollywood.css("div.play_music_cont").each do |project|
-			
-				title = project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span.m0081c8 a").text.to_sym
-				
-				projects[title] = {
-					# :song_id => project.css("li.mfl.mht22.moverflow.minline input.chk_1828482"),
-					:title => title,
-					:from => project.css("li.mfl.mwidth425.bg_0000 h3 span.mb_000.mfnt11").text,
-					:film => project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span a.ma71528").text
-					# :music_link => project.css("li.mfl.malignlft.moverflow.minline.mht24.mmr15 a")["href"]	
-# 				}
-# 			end
-# 		}
-
-	
-
-
-
-
 # 		parameters[:to] = (email_address)
 # 		@mailgun.messages.send_email(parameters)
 # 	end
 
-
-
-
-
-
-
-
 # end
 
 
+html = open('http://www.bollywoodhungama.com/more/music/index/type/listing')
 
+bollywood = Nokogiri::HTML(html)
 
+projects = {}
 
+projects[:music_link] = "http://www.bollywoodhungama.com/more/music/index/type/listing#"
+
+bollywood.css("div.play_music_cont").each do |project|
+	
+	title = project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span.m0081c8 a").text.to_sym
+	
+	projects[title] = {
+		# :song_id => project.css("li.mfl.mht22.moverflow.minline input.chk_1828482"),
+		:title => title,
+		:from => project.css("li.mfl.mwidth425.bg_0000 h3 span.mb_000.mfnt11").text,
+		:film => project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span a.ma71528").text
+		# :music_link => project.css("li.mfl.malignlft.moverflow.minline.mht24.mmr15 a")["href"]
+		
+	}
+end
 
 
 
