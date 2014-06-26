@@ -4,7 +4,6 @@ require 'open-uri'
 
 
 
-
 class ScrapeSongs
 	
 	def initialize
@@ -21,15 +20,15 @@ class ScrapeSongs
 			
 			projects[title] = {
 				:title => title,
-				:film => project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span a.ma71528").text,
-				# :music_link => project.css("li.mfl.malignlft.moverflow.minline.mht24.mmr15 a")["href"]
+				:film => project.css("li.mfl.mwidth425.bg_0000.moverflow.mml7 h3 span a.ma71528").text, 
 				:music_link => "http://www.bollywoodhungama.com/more/music/index/type/listing#"
+				# :music_link => project.css("li.mfl.malignlft.moverflow.minline.mht24.mmr15 a")["href"]
 			}
 		end
 		projects
 	end
 
-#iteraate throught the projects hash -- projects.each do |hash| ---> hash.each do |k, v| ---> {:title => etc.}
+#iterate throught the projects hash -- projects.each do |hash| ---> hash.each do |k, v| ---> {:title => etc.}
 
 
 end
@@ -37,10 +36,8 @@ end
 
 
 
-class Songs
 
-	#title reader and writer
-	#film reader and writer
+class Songs
 
 	def title
 		@title
@@ -58,6 +55,14 @@ class Songs
 		@film = film
 	end
 
+	def music_link
+		@music_link
+	end
+
+	def music_link=(music_link)
+		@music_link
+	end
+
 	def self.all
 		ObjectSpace.each_object(self).to_a
 	end
@@ -69,6 +74,7 @@ class Songs
 			new_song = Songs.new
 			new_song.title = big_hash_value[:title]
 			new_song.film = big_hash_value[:film]
+			new_song.music_link = big_hash_value[:music_link]
 		end
 	end
 
@@ -82,16 +88,8 @@ class Songs
 end
 
 
-# binding.pry
 
 
-
-# song = ScrapeSongs.new
-# song.title
-
-# song.title
-
-# song.film
 
 # class Email
 
@@ -154,25 +152,3 @@ end
 # 		:percent_funded => project.css("ul.project-stats li.first.funded strong").text
 # 	}
 # end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
