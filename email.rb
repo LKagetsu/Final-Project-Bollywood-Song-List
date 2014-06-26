@@ -1,4 +1,6 @@
 require 'mailgun'
+require 'bollywoodemailer.rb'
+
 
 class Email
 	Mailgun.configure do |config|
@@ -17,6 +19,8 @@ class Email
 			:from => "postmaster@sandbox0643d7a456af493ab765c4812d96d929.mailgun.org"
 		}
 		parameters[:to] = (email_address)
+		Songs.all.each do |v|
+			parameters[:text] = "#{v.title} from #{v.film}. Link: #{v.music_link}"
 		@mailgun.messages.send_email(parameters)
 	end
 
