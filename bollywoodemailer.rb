@@ -63,9 +63,38 @@ class Songs
 		@music_link
 	end
 
+
+
+
+	def youtube_search
+		@youtube_search
+	end
+
+	def youtube_search=(youtube_search)
+		@youtube_search = youtube_search
+	end
+
+
+	def self.youtube_search(song_title, song_film)
+		youtube_search.search(:page => 1, :per_page => 5).first
+		youtube_search
+	end
+
+
+	# def self.youtube_search(song_title, song_film)
+	# 	# Songs.all.each do |song|
+	# 		youtube_search.search("#{song.film} #{song.title}", :page => 1, :per_page => 5).first
+	# 	# end
+	# 	youtube_search
+	# end
+
+
+
+
 	def self.all
 		ObjectSpace.each_object(self).to_a
 	end
+
 
 	def self.new_songs
 		instance_of_scraper_class = ScrapeSongs.new
@@ -78,6 +107,10 @@ class Songs
 		end
 	end
 
+end
+
+Songs.new_songs
+
 
 	#a method that will give us the projects array/hash?
 
@@ -85,7 +118,11 @@ class Songs
 	#create a new instance of your ScrapeSong class
 	#class Songs on that instance
 
-end
+
+
+
+
+
 
 
 

@@ -26,11 +26,32 @@ class Email
 		parameters[:text] = []
 
 		Songs.all.each do |v|
-			parameters[:text] << "#{v.title} from #{v.film}. Listen Here: #{v.music_link}
+			parameters[:text] << "#{v.title} from #{v.film}. Listen Here: http://www.bollywoodhungama.com/more/music/index/type/listing#
 			"
+			# t = Time.now
+			# every t + (60 * 10)
+
 		end
 		@mailgun.messages.send_email(parameters)
 	end
 
 end
 
+
+
+
+
+
+
+#replace #{v.music_link} with the link since it is the same for every song?
+
+
+#GET https://www.googleapis.com/youtube/v3/search
+
+# function searchByKeyword() {
+# 	var results = YouTube.Search.list('id, snippet', {q: "#{v.film} #{v.title}", maxResults: 5})
+# 	for(var i in results.items) {
+# 		var item = results.items[i];
+# 		Logger.log('[%s] Title: %s', item.id.videoId, item.snippet.title);
+# 	}	
+# }
