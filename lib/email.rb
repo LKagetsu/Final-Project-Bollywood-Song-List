@@ -1,5 +1,5 @@
 require 'mailgun'
-require './bollywoodemailer.rb'
+require_relative 'bollywoodemailer.rb'
 # require 'bollywoodemailer.rb'
 
 
@@ -26,7 +26,7 @@ class Email
 		parameters[:text] = []
 
 		Songs.all.each do |v|
-			parameters[:text] << "#{v.title} from #{v.film}. Listen Here: http://www.bollywoodhungama.com/more/music/index/type/listing#
+			parameters[:text] << "#{v.title} from #{v.film}. Listen Here: #{Songs.search_all} 
 			"
 			# t = Time.now
 			# every t + (60 * 10)
@@ -39,7 +39,7 @@ end
 
 
 
-
+#http://www.bollywoodhungama.com/more/music/index/type/listing#
 
 
 

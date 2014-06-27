@@ -4,7 +4,9 @@
 
 require 'nokogiri'
 require 'open-uri'
-require './email.rb'
+require 'youtube_search'
+require './lib/bollywoodemailer.rb'
+require './lib/email.rb'
 
 
 task :emailsongs do

@@ -76,11 +76,9 @@ class Songs
 	# end
 
 	def youtube_search(song)
-		YoutubeSearch.search("#{title}" "#{film}", :page => 10, :per_page => 5).first
-		# youtube_search
-		# youtube_search("#{:title} #{:film}")
+		id = YoutubeSearch.search(song, :page => 10, :per_page => 3).first['video_id']
+		%{<iframe src="http://www.youtube.com/embed/#{id}" width=640 height=480 frameborder=0></iframe>}
 	end
-	
 
 
 
