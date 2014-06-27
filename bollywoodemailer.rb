@@ -100,13 +100,15 @@ class Songs
 		end
 	end
 
-	# def self.search_all
-	# 	youtube_results = []
-	# 	self.all.each do |song|
-	# 		youtube_results << youtube_search("#{title} #{film}")
-	# 	end
-	# 	youtube_results
-	# end
+	def self.search_all
+		youtube_results = []
+		self.all.each do |song|
+			if !song.title.nil?
+				youtube_results << song.youtube_search(song.title + " " + song.film)
+			end
+		end
+		youtube_results
+	end
 
 
 end
