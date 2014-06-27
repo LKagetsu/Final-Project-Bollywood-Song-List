@@ -2,6 +2,7 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 
+require 'youtube_search'
 
 
 class ScrapeSongs
@@ -66,28 +67,20 @@ class Songs
 
 
 
-	def youtube_search
-		@youtube_search
-	end
-
-	def youtube_search=(youtube_search)
-		@youtube_search = youtube_search
-	end
-
-
-	def self.youtube_search(song_title, song_film)
-		youtube_search.search(:page => 1, :per_page => 5).first
-		youtube_search
-	end
-
-
-	# def self.youtube_search(song_title, song_film)
-	# 	# Songs.all.each do |song|
-	# 		youtube_search.search("#{song.film} #{song.title}", :page => 1, :per_page => 5).first
-	# 	# end
-	# 	youtube_search
+	# def youtube_search
+	# 	@youtube_search
 	# end
 
+	# def youtube_search=(youtube_search)
+	# 	@youtube_search = youtube_search
+	# end
+
+	def youtube_search(song)
+		YoutubeSearch.search("#{title}" "#{film}", :page => 10, :per_page => 5).first
+		# youtube_search
+		# youtube_search("#{:title} #{:film}")
+	end
+	
 
 
 
@@ -107,10 +100,18 @@ class Songs
 		end
 	end
 
+	# def self.search_all
+	# 	youtube_results = []
+	# 	self.all.each do |song|
+	# 		youtube_results << youtube_search("#{title} #{film}")
+	# 	end
+	# 	youtube_results
+	# end
+
+
 end
 
 Songs.new_songs
-
 
 	#a method that will give us the projects array/hash?
 
